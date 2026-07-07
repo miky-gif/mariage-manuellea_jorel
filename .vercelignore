@@ -1,8 +1,9 @@
-# Fichiers/dossiers de developpement inutiles en production (allege le deploiement).
-# Le serveur local (dev-server.js) ne sert qu'en local ; en ligne le site est statique.
+# Fichiers de developpement exclus du deploiement.
+# IMPORTANT : la barre oblique "/" au debut ancre le chemin A LA RACINE seulement,
+# pour ne PAS exclure par erreur public/assets/images (les photos du site !).
 dev-server.js
-data
-images
-scripts
-project claude design
+/data
+/images
+/scripts
+/project claude design
 *.log
