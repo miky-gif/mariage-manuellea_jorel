@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#FDF6F0" />
+<title>Manuela &amp; Jorel · 6 février 2027 · Yaoundé</title>
+<meta name="description" content="Manuela &amp; Jorel se marient le 6 février 2027 aux Jardins de René, Yaoundé. Confirmez votre présence." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css?v=2" />
+<!-- Si le JavaScript est desactive, on affiche tout le contenu (pas d'animation d'apparition) -->
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <a href="#accueil" class="nav__brand">Manuela <span>&amp;</span> Jorel</a>
+  <div class="nav__links" id="navLinks">
+    <a href="#histoire">Notre histoire</a>
+    <a href="#programme">Programme</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#dresscode">Dress code</a>
+    <a href="#rsvp" class="nav__rsvp">Confirmer</a>
+  </div>
+  <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menu plein écran (mobile) -->
+<div class="menu" id="menu" hidden>
+  <button class="menu__close" id="menuClose" aria-label="Fermer le menu">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
+  <div class="menu__brand">Manuela &amp; Jorel</div>
+  <a href="#accueil">Accueil</a>
+  <a href="#histoire">Notre histoire</a>
+  <a href="#programme">Programme</a>
+  <a href="#galerie">Galerie</a>
+  <a href="#dresscode">Dress code</a>
+  <a href="#rsvp" class="menu__cta">Confirmer ma présence</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="accueil">
+  <div class="hero__media">
+    <video class="hero__video" autoplay loop muted playsinline preload="none" poster="assets/images/poster.jpg">
+      <source src="assets/video/save-the-date.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__veil"></div>
+    <div class="hero__vignette"></div>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__script reveal">Nous nous marions</div>
+    <h1 class="hero__names reveal">Manuela <span>&amp;</span> Jorel</h1>
+    <div class="hero__meta reveal">
+      <span class="rule"></span>
+      <div>6 février 2027 · Les Jardins de René, Yaoundé</div>
+      <span class="rule"></span>
+    </div>
+    <a href="#rsvp" class="btn btn--hero reveal">Confirmer ma présence</a>
+
+    <!-- Compte à rebours -->
+    <div class="countdown reveal" id="countdown" aria-live="polite">
+      <div class="countdown__intro" id="cdIntro">Jusqu'au grand jour</div>
+      <div class="countdown__grid">
+        <div class="cd"><div class="cd__num" id="cd-d">--</div><div class="cd__lbl">Jours</div></div>
+        <div class="cd"><div class="cd__num" id="cd-h">--</div><div class="cd__lbl">Heures</div></div>
+        <div class="cd"><div class="cd__num" id="cd-m">--</div><div class="cd__lbl">Minutes</div></div>
+        <div class="cd"><div class="cd__num" id="cd-s">--</div><div class="cd__lbl">Secondes</div></div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#histoire" class="hero__scroll">Découvrir
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
+</header>
+
+<!-- ===================== NOTRE HISTOIRE ===================== -->
+<section class="story" id="histoire">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow"><span></span>Notre histoire<span></span></div>
+      <h2>Du service… au grand amour</h2>
+    </div>
+
+    <!-- Ligne 1 : La rencontre (photo + texte) -->
+    <div class="story__row reveal">
+      <div class="story__frame">
+        <span class="story__frame-line"></span>
+        <img src="assets/images/story-1.jpg?v=2" alt="Manuela et Jorel au début de leur histoire" loading="lazy" width="900" height="1125" />
+      </div>
+      <div class="story__text">
+        <h3>La rencontre</h3>
+        <p>Tout a commencé lors d'une soirée que Jorel organisait. Ce soir-là, Manuela ne devait même pas venir : elle ne se sentait pas bien et comptait rester chez elle. Mais une de ses cousines a insisté avec une phrase qui, sans le savoir, allait tout changer : <em>« Viens… ça pourrait même changer ta vie. »</em></p>
+        <p>Elle est arrivée un peu en retard, parmi les personnes venues assurer le service. Il a suffi d'un regard. Pour Jorel, ce ne fut pas seulement de l'attirance, mais une évidence — comme si son cœur reconnaissait quelqu'un que ses yeux rencontraient pourtant pour la première fois. <em>« C'est elle »</em>, s'est-il dit.</p>
+        <p>Il a attendu qu'elle soit seule pour aller lui parler. La conversation fut simple, naturelle, sans effort, comme s'ils reprenaient une discussion interrompue depuis longtemps. À la fin de la soirée, il lui a demandé son numéro… et ils ont continué à parler pendant des heures.</p>
+      </div>
+    </div>
+
+    <!-- Ligne 2 : Le bouquet & la famille (texte + photo) -->
+    <div class="story__row story__row--rev reveal">
+      <div class="story__text">
+        <h3>Un simple service…</h3>
+        <p>Quelques jours plus tard, il lui demande un petit service : passer récupérer un colis. Il pensait qu'elle refuserait — elle le connaissait à peine. Mais elle y est allée. Et à son arrivée, ce n'était pas un colis qui l'attendait, mais un immense bouquet de fleurs : sa façon de lui dire, sans encore trouver les mots, qu'elle prenait déjà une place particulière dans son cœur.</p>
+        <p>À partir de là, tout s'est enchaîné avec une belle évidence. Ils partageaient le même quotidien, les mêmes rires, les mêmes rêves, la même envie de construire. Elle avait son fils, lui sa fille : très vite, ils ne formaient plus seulement un couple, mais une famille.</p>
+        <p>La vie leur a ensuite offert leur plus beau cadeau : leur fils <strong>Nolan</strong>. Aujourd'hui, entourés de leurs enfants, ils avancent main dans la main — pour toujours.</p>
+      </div>
+      <div class="story__frame">
+        <span class="story__frame-line story__frame-line--left"></span>
+        <img src="assets/images/gallery-3.jpg" alt="Manuela et Jorel, le début de leur histoire" loading="lazy" width="1000" height="833" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROGRAMME ===================== -->
+<section class="program" id="programme">
+  <div class="wrap wrap--narrow">
+    <div class="head reveal">
+      <div class="eyebrow eyebrow--light"><span></span>Le grand jour<span></span></div>
+      <h2 class="on-dark">Programme de la journée</h2>
+      <div class="head__sub">Samedi 6 février 2027 · Les Jardins de René, Yaoundé</div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl">
+        <div class="tl__time"><span class="tl__h">10</span><span class="tl__m">H00</span></div>
+        <div class="tl__line"><span class="tl__dot"></span></div>
+        <div class="tl__body"><div class="tl__title">Cérémonie</div><div class="tl__desc">Accueil des invités &amp; échange des vœux</div></div>
+      </div>
+      <div class="tl">
+        <div class="tl__time"><span class="tl__h">12</span><span class="tl__m">H00</span></div>
+        <div class="tl__line"><span class="tl__dot"></span></div>
+        <div class="tl__body"><div class="tl__title">Cocktail</div><div class="tl__desc">Vin d'honneur &amp; séance photos dans les jardins</div></div>
+      </div>
+      <div class="tl">
+        <div class="tl__time"><span class="tl__h">14</span><span class="tl__m">H00</span></div>
+        <div class="tl__line"><span class="tl__dot"></span></div>
+        <div class="tl__body"><div class="tl__title">Déjeuner de réception</div><div class="tl__desc">Déjeuner assis &amp; discours des proches</div></div>
+      </div>
+      <div class="tl tl--last">
+        <div class="tl__time"><span class="tl__h">18</span><span class="tl__m">H00</span></div>
+        <div class="tl__line"><span class="tl__dot"></span></div>
+        <div class="tl__body"><div class="tl__title">Soirée dansante</div><div class="tl__desc">Ouverture du bal &amp; fête jusqu'au bout de la nuit</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALERIE ===================== -->
+<section class="gallery" id="galerie">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow"><span></span>Souvenirs<span></span></div>
+      <h2>Galerie</h2>
+      <p class="head__note">Quelques instants qui racontent notre histoire</p>
+    </div>
+    <div class="gallery__grid reveal" id="galleryGrid"><!-- rempli par main.js --></div>
+  </div>
+</section>
+
+<!-- ===================== DRESS CODE ===================== -->
+<section class="dress" id="dresscode">
+  <div class="wrap wrap--mid">
+    <div class="head reveal">
+      <div class="eyebrow"><span></span>Pour l'occasion<span></span></div>
+      <h2>Dress code</h2>
+      <div class="dress__tagline">Élégance romantique, tons poudrés</div>
+      <p class="dress__intro">Laissez-vous inspirer par notre palette de couleurs pour accorder vos tenues à l'ambiance douce et chaleureuse de la journée.</p>
+    </div>
+
+    <div class="palette reveal">
+      <div class="swatch"><span style="background:#E8A598"></span><b>Dusty Pink</b></div>
+      <div class="swatch"><span style="background:#E07560"></span><b>Coral</b></div>
+      <div class="swatch"><span style="background:#F2B097"></span><b>Peach</b></div>
+      <div class="swatch"><span style="background:#F4A28C"></span><b>Salmon</b></div>
+      <div class="swatch"><span style="background:#EDD5C0"></span><b>Nude / Beige</b></div>
+      <div class="swatch"><span style="background:#F5E6D3;border:1px solid rgba(122,64,64,.18)"></span><b>Champagne</b></div>
+    </div>
+
+    <!-- <div class="dress__cards reveal">
+      <div class="dcard">
+        <div class="dcard__icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.5 4.5L19 9l-3.5 3 1 5-4.5-2.5L7.5 17l1-5L5 9l4.5-1.5z"/></svg>
+        </div>
+        <h3>Pour elles</h3>
+        <p>Robe longue ou mi-longue, matières fluides et vaporeuses, dans les tons doux de la palette.</p>
+      </div>
+      <div class="dcard">
+        <div class="dcard__icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3l5 5 5-5M12 8v13M8 21h8"/></svg>
+        </div>
+        <h3>Pour eux</h3>
+        <p>Costume beige, sable, gris clair ou crème, chemise blanche, avec une touche corail ou rose poudré en accessoire.</p>
+      </div>
+      <div class="dcard dcard--avoid">
+        <div class="dcard__icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <h3>À éviter</h3>
+        <p>Le blanc (réservé à la mariée), le noir intégral et les couleurs trop vives.</p>
+      </div>
+    </div> -->
+
+    <div class="dress__note reveal">Merci de réserver le blanc à la mariée.</div>
+  </div>
+</section>
+
+<!-- ===================== RSVP ===================== -->
+<section class="rsvp" id="rsvp">
+  <div class="card reveal">
+    <div class="card__top"></div>
+    <div class="card__body">
+
+      <!-- Formulaire -->
+      <div id="rsvpForm">
+        <div class="head head--tight">
+          <div class="eyebrow"><span></span>Confirmation de présence<span></span></div>
+          <h2>Serez-vous des nôtres ?</h2>
+          <p class="head__note">Merci de confirmer votre présence avant le 6 janvier 2027.</p>
+        </div>
+
+        <div class="field">
+          <label for="fName">Nom et prénom *</label>
+          <input type="text" id="fName" name="name" placeholder="Votre nom complet" autocomplete="name" />
+          <div class="err" id="errName" hidden>Merci d'indiquer votre nom.</div>
+        </div>
+
+        <div class="field">
+          <label for="fPhone">Numéro de téléphone *</label>
+          <input type="tel" id="fPhone" name="phone" placeholder="Ex : 6 90 00 00 00" autocomplete="tel" inputmode="tel" />
+          <div class="err" id="errPhone" hidden>Merci d'indiquer un numéro de téléphone.</div>
+        </div>
+
+        <div class="field">
+          <label>Serez-vous présent(e) ?</label>
+          <div class="choice">
+            <button type="button" class="choice__btn" id="btnYes" data-val="oui">Je serai présent(e)</button>
+            <button type="button" class="choice__btn" id="btnNo" data-val="non">Je ne pourrai pas venir</button>
+          </div>
+          <div class="err" id="errAttend" hidden>Merci d'indiquer si vous serez présent(e).</div>
+        </div>
+
+        <div class="field">
+          <label for="fMsg">Un mot pour les mariés (facultatif)</label>
+          <textarea id="fMsg" name="message" rows="3" placeholder="Vos vœux, une chanson à demander au DJ..."></textarea>
+        </div>
+
+        <button type="button" class="btn btn--full" id="rsvpSubmit">Envoyer ma réponse</button>
+        <div class="err err--center" id="errSubmit" hidden></div>
+      </div>
+
+      <!-- Confirmation -->
+      <div id="rsvpDone" hidden>
+        <div class="done">
+          <span class="done__check">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <h2 id="doneTitle">Votre présence est confirmée</h2>
+          <p id="doneMsg"></p>
+          <button type="button" class="link-btn" id="rsvpReset">Modifier ma réponse</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__names">Manuela &amp; Jorel</div>
+    <div class="footer__meta">
+      <span class="rule"></span>6 février 2027 · Les Jardins de René, Yaoundé, Cameroun<span class="rule"></span>
+    </div>
+    <div class="footer__qr">
+      <!-- <div class="footer__qr-box" id="qrBox">
+        <img src="assets/qr.png" alt="QR code de partage du site" id="qrImg" onerror="this.style.display='none';document.getElementById('qrPlaceholder').style.display='flex'" />
+        <div class="footer__qr-ph" id="qrPlaceholder">QR code<br><small>à générer</small></div>
+      </div>
+      <span class="footer__qr-label">Scannez pour partager le site</span>
+    </div> -->
+    <div class="footer__love">Avec tout notre amour</div>
+  </div>
+</footer>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__close" id="lbClose" aria-label="Fermer">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Précédent">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="15 6 9 12 15 18"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Suivant">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+  <figure class="lightbox__fig" id="lbFig">
+    <img src="" alt="" id="lbImg" />
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<script src="js/main.js?v=2"></script>
+</body>
+</html>

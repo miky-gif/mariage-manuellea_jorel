@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Les reponses RSVP sont des donnees locales : a sauvegarder, pas a versionner
+data/rsvps.json

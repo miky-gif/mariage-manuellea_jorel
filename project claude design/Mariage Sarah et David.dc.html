@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#16233C">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#16233C"/>
+<text x="600" y="410" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="150" fill="#C3A25C">S &amp; D</text>
+<text x="600" y="500" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="10" fill="#F7F1E6" fill-opacity="0.8">15 · 11 · 2025</text>
+</svg>
+</template>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#F7F1E6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+::selection{background:#C3A25C;color:#16233C}
+[data-reveal]{opacity:0;transform:translateY(32px);transition:opacity 1.05s cubic-bezier(.19,.77,.28,1),transform 1.05s cubic-bezier(.19,.77,.28,1);will-change:opacity,transform}
+[data-reveal][data-shown]{opacity:1;transform:none}
+@keyframes kb{0%{transform:scale(1.02)}100%{transform:scale(1.15)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes ovIn{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}[data-reveal]{transition:none!important;opacity:1!important;transform:none!important}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="font-family:'Mulish',system-ui,sans-serif;color:#16233C;background:#F7F1E6;overflow-x:hidden;position:relative">
+
+<nav style="{{ navStyle }}">
+<a href="#accueil" onClick="{{ closeMenu }}" style="text-decoration:none;color:inherit;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:23px;letter-spacing:.05em;display:flex;align-items:center;gap:8px">Sarah <span style="color:var(--accent,#C3A25C);font-style:italic;font-weight:400">&amp;</span> David</a>
+<sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;gap:clamp(18px,2.4vw,40px)">
+<sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+<a href="{{ item.href }}" style="text-decoration:none;color:inherit;font-family:'Mulish',sans-serif;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.85;transition:opacity .25s" style-hover="opacity:1">{{ item.label }}</a>
+</sc-for>
+<a href="#rsvp" style="text-decoration:none;color:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--accent,#C3A25C);padding:10px 18px;border-radius:2px;transition:all .25s" style-hover="background:var(--accent,#C3A25C);color:#16233C">RSVP</a>
+</div>
+</sc-if>
+<sc-if value="{{ isMobile }}">
+<button onClick="{{ openMenu }}" aria-label="Ouvrir le menu" style="background:none;border:none;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:5px;padding:8px">
+<span style="width:26px;height:2px;background:currentColor;display:block"></span>
+<span style="width:26px;height:2px;background:currentColor;display:block"></span>
+<span style="width:17px;height:2px;background:currentColor;display:block"></span>
+</button>
+</sc-if>
+</nav>
+
+<sc-if value="{{ mobileOpen }}">
+<div style="position:fixed;inset:0;z-index:90;background:linear-gradient(160deg,#16233C,#0E1930);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;animation:ovIn .35s ease">
+<button onClick="{{ closeMenu }}" aria-label="Fermer" style="position:absolute;top:22px;right:22px;background:none;border:none;color:#F7F1E6;cursor:pointer;padding:8px">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="5" x2="19" y2="19" /><line x1="19" y1="5" x2="5" y2="19" /></svg>
+</button>
+<div style="font-family:'Pinyon Script',cursive;color:var(--accent,#C3A25C);font-size:38px;margin-bottom:14px">Sarah &amp; David</div>
+<sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+<a href="{{ item.href }}" onClick="{{ closeMenu }}" style="text-decoration:none;color:#F7F1E6;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;letter-spacing:.02em;padding:9px 0">{{ item.label }}</a>
+</sc-for>
+<a href="#rsvp" onClick="{{ closeMenu }}" style="margin-top:22px;text-decoration:none;color:#16233C;background:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;padding:15px 32px;border-radius:2px">Confirmer ma présence</a>
+</div>
+</sc-if>
+
+<section id="accueil" data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px clamp(20px,6vw,60px) 70px;overflow:hidden">
+<div style="position:absolute;inset:0;z-index:0;overflow:hidden">
+<video autoplay loop muted playsinline poster="{{ poster }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 22s ease-in-out infinite alternate">
+<sc-if value="{{ hasVideo }}"><source src="{{ videoSrc }}" type="video/mp4" /></sc-if>
+</video>
+<div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,23,44,.82),rgba(9,16,32,.96));opacity:var(--veil,.72)"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(130% 90% at 50% 28%,transparent 42%,rgba(8,14,28,.6) 100%)"></div>
+</div>
+<div style="position:relative;z-index:2;max-width:920px;display:flex;flex-direction:column;align-items:center;gap:22px">
+<div data-reveal style="font-family:'Pinyon Script',cursive;color:var(--accent,#C3A25C);font-size:clamp(28px,5vw,46px);line-height:1">Nous nous marions</div>
+<h1 data-reveal style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;color:#F7F1E6;font-size:clamp(52px,11vw,124px);line-height:.98;letter-spacing:.01em">Sarah <span style="color:var(--accent,#C3A25C);font-style:italic;font-weight:300">&amp;</span> David</h1>
+<div data-reveal style="display:flex;align-items:center;gap:16px;color:#F7F1E6">
+<span style="width:38px;height:1px;background:var(--accent,#C3A25C);opacity:.7"></span>
+<div style="font-family:'Mulish',sans-serif;font-weight:500;font-size:13px;letter-spacing:.28em;text-transform:uppercase;line-height:1.6">15 novembre 2025 · Douala</div>
+<span style="width:38px;height:1px;background:var(--accent,#C3A25C);opacity:.7"></span>
+</div>
+<a data-reveal href="#rsvp" style="margin-top:6px;text-decoration:none;background:var(--accent,#C3A25C);color:#16233C;font-family:'Mulish',sans-serif;font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;padding:18px 40px;border-radius:2px;box-shadow:0 22px 44px -22px rgba(0,0,0,.65);transition:all .3s" style-hover="transform:translateY(-3px);box-shadow:0 28px 50px -20px rgba(0,0,0,.75)">Confirmer ma présence</a>
+</div>
+<sc-if value="{{ showCountdown }}" hint-placeholder-val="{{ true }}">
+<div data-reveal style="position:relative;z-index:2;margin-top:clamp(40px,6vh,72px);display:flex;flex-direction:column;align-items:center;gap:16px">
+<div style="color:rgba(247,241,230,.75);font-family:'Mulish',sans-serif;font-weight:500;font-size:12px;letter-spacing:.24em;text-transform:uppercase">{{ countdownIntro }}</div>
+<div style="display:flex;gap:clamp(10px,2vw,22px)">
+<div style="min-width:clamp(64px,13vw,98px);padding:16px 8px;background:rgba(247,241,230,.06);border:1px solid rgba(247,241,230,.18);border-radius:4px">
+<div style="font-family:'Cormorant Garamond',serif;font-weight:500;color:#F7F1E6;font-size:clamp(30px,5vw,48px);line-height:1">{{ cd.d }}</div>
+<div style="color:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:600;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:8px">Jours</div>
+</div>
+<div style="min-width:clamp(64px,13vw,98px);padding:16px 8px;background:rgba(247,241,230,.06);border:1px solid rgba(247,241,230,.18);border-radius:4px">
+<div style="font-family:'Cormorant Garamond',serif;font-weight:500;color:#F7F1E6;font-size:clamp(30px,5vw,48px);line-height:1">{{ cd.h }}</div>
+<div style="color:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:600;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:8px">Heures</div>
+</div>
+<div style="min-width:clamp(64px,13vw,98px);padding:16px 8px;background:rgba(247,241,230,.06);border:1px solid rgba(247,241,230,.18);border-radius:4px">
+<div style="font-family:'Cormorant Garamond',serif;font-weight:500;color:#F7F1E6;font-size:clamp(30px,5vw,48px);line-height:1">{{ cd.m }}</div>
+<div style="color:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:600;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:8px">Minutes</div>
+</div>
+<div style="min-width:clamp(64px,13vw,98px);padding:16px 8px;background:rgba(247,241,230,.06);border:1px solid rgba(247,241,230,.18);border-radius:4px">
+<div style="font-family:'Cormorant Garamond',serif;font-weight:500;color:#F7F1E6;font-size:clamp(30px,5vw,48px);line-height:1">{{ cd.s }}</div>
+<div style="color:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:600;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:8px">Secondes</div>
+</div>
+</div>
+</div>
+</sc-if>
+<a href="#histoire" style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(247,241,230,.7);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'Mulish',sans-serif;font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Découvrir
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:floaty 2s ease-in-out infinite"><polyline points="6 9 12 15 18 9" /></svg>
+</a>
+</section>
+
+<section id="histoire" data-screen-label="Notre histoire" style="scroll-margin-top:76px;padding:clamp(80px,11vw,150px) clamp(20px,6vw,80px);background:#F7F1E6">
+<div style="max-width:1160px;margin:0 auto">
+<div data-reveal style="text-align:center;margin-bottom:clamp(52px,8vw,92px)">
+<div style="display:flex;align-items:center;justify-content:center;gap:14px;color:color-mix(in srgb,var(--accent,#C3A25C) 88%,#1a1204);font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase">
+<span style="width:30px;height:1px;background:currentColor;opacity:.55"></span>Notre histoire<span style="width:30px;height:1px;background:currentColor;opacity:.55"></span>
+</div>
+<h2 style="margin:18px 0 0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,5.5vw,64px);line-height:1.05;color:#16233C">Deux cœurs, une évidence</h2>
+</div>
+<div data-reveal style="display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,84px);align-items:center;margin-bottom:clamp(60px,9vw,120px)">
+<div style="position:relative;flex:1 1 320px;max-width:500px">
+<div style="position:absolute;right:-16px;bottom:-16px;left:26px;top:26px;border:1px solid var(--accent,#C3A25C);border-radius:4px;z-index:0"></div>
+<img src="{{ storyA }}" alt="Photo de Sarah et David" style="position:relative;z-index:1;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;box-shadow:0 34px 64px -34px rgba(22,35,60,.55)" />
+</div>
+<div style="flex:1 1 360px;max-width:520px">
+<h3 style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3vw,32px);color:#16233C">La rencontre</h3>
+<p style="margin:0 0 28px;font-family:'Mulish',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.9;color:#5C5647;max-width:48ch">Tout a commencé un soir d'harmattan, à Douala, lors du mariage d'amis communs. Une conversation qui ne devait durer que quelques minutes s'est étirée jusqu'au lever du jour — et ne s'est jamais vraiment arrêtée depuis.</p>
+<h3 style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3vw,32px);color:#16233C">L'évidence</h3>
+<p style="margin:0;font-family:'Mulish',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.9;color:#5C5647;max-width:48ch">Au fil des saisons, des rires partagés et des kilomètres parcourus côte à côte, une certitude s'est imposée : nous étions faits pour avancer main dans la main.</p>
+</div>
+</div>
+<div data-reveal style="display:flex;flex-wrap:wrap;gap:clamp(32px,6vw,84px);align-items:center">
+<div style="flex:1 1 360px;max-width:520px;order:1">
+<h3 style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3vw,32px);color:#16233C">La demande</h3>
+<p style="margin:0;font-family:'Mulish',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.9;color:#5C5647;max-width:48ch">Face à l'océan, à Kribi, une bague au creux de la main et quelques mots tremblants ont scellé notre promesse. Un « oui » murmuré, des larmes de joie, et le début d'une vie entière à écrire ensemble.</p>
+</div>
+<div style="position:relative;flex:1 1 320px;max-width:500px;order:2">
+<div style="position:absolute;left:-16px;bottom:-16px;right:26px;top:26px;border:1px solid var(--accent,#C3A25C);border-radius:4px;z-index:0"></div>
+<img src="{{ storyB }}" alt="La demande en mariage" style="position:relative;z-index:1;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;box-shadow:0 34px 64px -34px rgba(22,35,60,.55)" />
+</div>
+</div>
+</div>
+</section>
+
+<section id="programme" data-screen-label="Programme" style="scroll-margin-top:76px;padding:clamp(80px,11vw,150px) clamp(20px,6vw,80px);background:linear-gradient(180deg,#16233C,#0E1930);color:#F7F1E6">
+<div style="max-width:720px;margin:0 auto">
+<div data-reveal style="text-align:center;margin-bottom:clamp(48px,7vw,80px)">
+<div style="display:flex;align-items:center;justify-content:center;gap:14px;color:var(--accent,#C3A25C);font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase">
+<span style="width:30px;height:1px;background:currentColor;opacity:.6"></span>Le grand jour<span style="width:30px;height:1px;background:currentColor;opacity:.6"></span>
+</div>
+<h2 style="margin:18px 0 12px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,5.5vw,64px);line-height:1.05;color:#F7F1E6">Programme de la journée</h2>
+<div style="font-family:'Mulish',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,241,230,.55)">Samedi 15 novembre 2025 · Douala</div>
+</div>
+<div data-reveal>
+<div style="display:flex;align-items:stretch">
+<div style="flex:none;width:clamp(54px,10vw,72px);text-align:right;padding:2px 18px 0 0"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);color:var(--accent,#C3A25C);line-height:1">14</div><div style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;color:rgba(247,241,230,.5);margin-top:3px">H00</div></div>
+<div style="flex:none;width:1px;background:color-mix(in srgb,var(--accent,#C3A25C) 42%,transparent);position:relative;margin:0 3px"><span style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent,#C3A25C);box-shadow:0 0 0 5px #16233C"></span></div>
+<div style="flex:1;padding:0 0 clamp(36px,5vw,52px) clamp(22px,3vw,34px)"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(23px,3vw,30px);color:#F7F1E6;line-height:1.15">Cérémonie</div><div style="font-family:'Mulish',sans-serif;font-size:14px;line-height:1.6;color:rgba(247,241,230,.62);margin-top:6px">Accueil des invités dès 13h30 · Échange des vœux</div></div>
+</div>
+<div style="display:flex;align-items:stretch">
+<div style="flex:none;width:clamp(54px,10vw,72px);text-align:right;padding:2px 18px 0 0"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);color:var(--accent,#C3A25C);line-height:1">16</div><div style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;color:rgba(247,241,230,.5);margin-top:3px">H00</div></div>
+<div style="flex:none;width:1px;background:color-mix(in srgb,var(--accent,#C3A25C) 42%,transparent);position:relative;margin:0 3px"><span style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent,#C3A25C);box-shadow:0 0 0 5px #16233C"></span></div>
+<div style="flex:1;padding:0 0 clamp(36px,5vw,52px) clamp(22px,3vw,34px)"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(23px,3vw,30px);color:#F7F1E6;line-height:1.15">Cocktail</div><div style="font-family:'Mulish',sans-serif;font-size:14px;line-height:1.6;color:rgba(247,241,230,.62);margin-top:6px">Vin d'honneur &amp; séance photos dans les jardins</div></div>
+</div>
+<div style="display:flex;align-items:stretch">
+<div style="flex:none;width:clamp(54px,10vw,72px);text-align:right;padding:2px 18px 0 0"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);color:var(--accent,#C3A25C);line-height:1">18</div><div style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;color:rgba(247,241,230,.5);margin-top:3px">H00</div></div>
+<div style="flex:none;width:1px;background:color-mix(in srgb,var(--accent,#C3A25C) 42%,transparent);position:relative;margin:0 3px"><span style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent,#C3A25C);box-shadow:0 0 0 5px #16233C"></span></div>
+<div style="flex:1;padding:0 0 clamp(36px,5vw,52px) clamp(22px,3vw,34px)"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(23px,3vw,30px);color:#F7F1E6;line-height:1.15">Réception &amp; dîner</div><div style="font-family:'Mulish',sans-serif;font-size:14px;line-height:1.6;color:rgba(247,241,230,.62);margin-top:6px">Dîner assis &amp; discours des proches</div></div>
+</div>
+<div style="display:flex;align-items:stretch">
+<div style="flex:none;width:clamp(54px,10vw,72px);text-align:right;padding:2px 18px 0 0"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);color:var(--accent,#C3A25C);line-height:1">21</div><div style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;color:rgba(247,241,230,.5);margin-top:3px">H00</div></div>
+<div style="flex:none;width:1px;background:color-mix(in srgb,var(--accent,#C3A25C) 42%,transparent);position:relative;margin:0 3px"><span style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent,#C3A25C);box-shadow:0 0 0 5px #16233C"></span></div>
+<div style="flex:1;padding:0 0 0 clamp(22px,3vw,34px)"><div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(23px,3vw,30px);color:#F7F1E6;line-height:1.15">Soirée dansante</div><div style="font-family:'Mulish',sans-serif;font-size:14px;line-height:1.6;color:rgba(247,241,230,.62);margin-top:6px">Ouverture du bal &amp; fête jusqu'au bout de la nuit</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="galerie" data-screen-label="Galerie" style="scroll-margin-top:76px;padding:clamp(80px,11vw,150px) clamp(20px,6vw,72px);background:#F7F1E6">
+<div style="max-width:1200px;margin:0 auto">
+<div data-reveal style="text-align:center;margin-bottom:clamp(40px,6vw,68px)">
+<div style="display:flex;align-items:center;justify-content:center;gap:14px;color:color-mix(in srgb,var(--accent,#C3A25C) 88%,#1a1204);font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase">
+<span style="width:30px;height:1px;background:currentColor;opacity:.55"></span>Souvenirs<span style="width:30px;height:1px;background:currentColor;opacity:.55"></span>
+</div>
+<h2 style="margin:18px 0 12px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,5.5vw,64px);line-height:1.05;color:#16233C">Galerie</h2>
+<p style="margin:0;font-family:'Mulish',sans-serif;font-size:clamp(14px,1.5vw,16px);color:#7a7160;font-style:italic">Quelques instants qui racontent notre histoire</p>
+</div>
+<div data-reveal style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:clamp(10px,1.4vw,16px)">
+<sc-for list="{{ photos }}" as="p" hint-placeholder-count="8">
+<button onClick="{{ p.open }}" aria-label="{{ p.label }}" style="position:relative;aspect-ratio:4/5;border:none;padding:0;margin:0;cursor:pointer;overflow:hidden;border-radius:4px;background:#e9e0cf;box-shadow:0 14px 30px -22px rgba(22,35,60,.5);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s" style-hover="transform:translateY(-5px);box-shadow:0 26px 46px -22px rgba(22,35,60,.55)">
+<img src="{{ p.src }}" alt="{{ p.label }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.07)" />
+<span style="position:absolute;left:0;right:0;bottom:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px;background:linear-gradient(transparent,rgba(9,16,32,.62));color:#F7F1E6">
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.9">{{ p.label }}</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent,#C3A25C)" stroke-width="1.6"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="dresscode" data-screen-label="Dress code" style="scroll-margin-top:76px;padding:clamp(80px,11vw,150px) clamp(20px,6vw,80px);background:#EFE6D5">
+<div style="max-width:820px;margin:0 auto;text-align:center">
+<div data-reveal>
+<div style="display:flex;align-items:center;justify-content:center;gap:14px;color:color-mix(in srgb,var(--accent,#C3A25C) 88%,#1a1204);font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase">
+<span style="width:30px;height:1px;background:currentColor;opacity:.55"></span>Pour l'occasion<span style="width:30px;height:1px;background:currentColor;opacity:.55"></span>
+</div>
+<h2 style="margin:18px 0 6px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,5.5vw,64px);line-height:1.05;color:#16233C">Dress code</h2>
+<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(24px,3.4vw,34px);color:color-mix(in srgb,var(--accent,#C3A25C) 82%,#241a08)">Tenue de soirée chic</div>
+<p style="margin:20px auto 0;max-width:52ch;font-family:'Mulish',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.9;color:#6b6250">Nous serions ravis de vous voir sur votre trente-et-un. Laissez-vous inspirer par notre palette de couleurs pour accorder vos tenues à l'ambiance de la soirée.</p>
+</div>
+<div data-reveal style="margin-top:clamp(40px,6vw,64px);display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(26px,5vw,58px)">
+<div style="display:flex;flex-direction:column;align-items:center;gap:13px">
+<span style="width:clamp(60px,12vw,84px);height:clamp(60px,12vw,84px);border-radius:50%;background:#16233C;box-shadow:0 16px 30px -16px rgba(22,35,60,.6);border:3px solid rgba(255,255,255,.6)"></span>
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#16233C">Bleu nuit</span>
+<span style="font-family:'Mulish',sans-serif;font-weight:500;font-size:11px;letter-spacing:.06em;color:#9a9179">#16233C</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:13px">
+<span style="width:clamp(60px,12vw,84px);height:clamp(60px,12vw,84px);border-radius:50%;background:var(--accent,#C3A25C);box-shadow:0 16px 30px -16px rgba(195,162,92,.7);border:3px solid rgba(255,255,255,.6)"></span>
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#16233C">Doré</span>
+<span style="font-family:'Mulish',sans-serif;font-weight:500;font-size:11px;letter-spacing:.06em;color:#9a9179">#C3A25C</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:13px">
+<span style="width:clamp(60px,12vw,84px);height:clamp(60px,12vw,84px);border-radius:50%;background:#F4ECDD;box-shadow:0 16px 30px -18px rgba(22,35,60,.4);border:1px solid rgba(22,35,60,.16)"></span>
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#16233C">Ivoire</span>
+<span style="font-family:'Mulish',sans-serif;font-weight:500;font-size:11px;letter-spacing:.06em;color:#9a9179">#F4ECDD</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:13px">
+<span style="width:clamp(60px,12vw,84px);height:clamp(60px,12vw,84px);border-radius:50%;background:#6E2A3C;box-shadow:0 16px 30px -16px rgba(110,42,60,.6);border:3px solid rgba(255,255,255,.6)"></span>
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#16233C">Bordeaux</span>
+<span style="font-family:'Mulish',sans-serif;font-weight:500;font-size:11px;letter-spacing:.06em;color:#9a9179">#6E2A3C</span>
+</div>
+</div>
+<div data-reveal style="margin-top:38px;font-family:'Mulish',sans-serif;font-size:13px;line-height:1.6;color:#8a7f68;font-style:italic">Merci de réserver le blanc à la mariée.</div>
+</div>
+</section>
+
+<section id="rsvp" data-screen-label="RSVP" style="scroll-margin-top:76px;padding:clamp(80px,11vw,150px) clamp(20px,6vw,60px);background:#F7F1E6">
+<div data-reveal style="max-width:600px;margin:0 auto;background:#FBF7EF;border:1px solid rgba(195,162,92,.35);border-radius:8px;box-shadow:0 44px 96px -52px rgba(22,35,60,.5);overflow:hidden">
+<div style="height:4px;background:linear-gradient(90deg,transparent,var(--accent,#C3A25C),transparent)"></div>
+<div style="padding:clamp(30px,5vw,54px)">
+<sc-if value="{{ submitted }}">
+<div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
+<span style="width:64px;height:64px;border-radius:50%;background:color-mix(in srgb,var(--accent,#C3A25C) 16%,#fff);display:flex;align-items:center;justify-content:center;border:1px solid rgba(195,162,92,.5)">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--accent,#C3A25C)" stroke-width="1.8"><polyline points="20 6 9 17 4 12" /></svg>
+</span>
+<h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,4.5vw,44px);line-height:1.1;color:#16233C">{{ confTitle }}</h2>
+<p style="margin:0;font-family:'Mulish',sans-serif;font-size:clamp(15px,1.6vw,17px);line-height:1.8;color:#5C5647;max-width:42ch">{{ confMsg }}</p>
+<button onClick="{{ resetForm }}" style="background:none;border:none;cursor:pointer;font-family:'Mulish',sans-serif;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--accent,#C3A25C) 82%,#241a08);text-decoration:underline;text-underline-offset:4px;padding:6px">Modifier ma réponse</button>
+</div>
+</sc-if>
+<sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+<div style="text-align:center;margin-bottom:clamp(28px,4vw,38px)">
+<div style="display:flex;align-items:center;justify-content:center;gap:14px;color:color-mix(in srgb,var(--accent,#C3A25C) 88%,#1a1204);font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase">
+<span style="width:26px;height:1px;background:currentColor;opacity:.55"></span>R.S.V.P<span style="width:26px;height:1px;background:currentColor;opacity:.55"></span>
+</div>
+<h2 style="margin:16px 0 8px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,4.8vw,48px);line-height:1.05;color:#16233C">Serez-vous des nôtres ?</h2>
+<p style="margin:0;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.6;color:#7a7160">Merci de confirmer votre présence avant le 15 octobre 2025.</p>
+</div>
+<div style="margin-bottom:clamp(20px,3vw,26px)">
+<label style="display:block;font-family:'Mulish',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8a8069;margin-bottom:10px">Nom et prénom *</label>
+<input value="{{ name }}" onChange="{{ onName }}" placeholder="Votre nom complet" style="width:100%;padding:14px 16px;background:#fff;border:1px solid rgba(22,35,60,.18);border-radius:4px;font-family:'Mulish',sans-serif;font-size:15px;color:#16233C;outline:none;transition:border-color .2s,box-shadow .2s" style-focus="border-color:var(--accent,#C3A25C);box-shadow:0 0 0 3px rgba(195,162,92,.18)" />
+<sc-if value="{{ errName }}"><div style="margin-top:8px;font-family:'Mulish',sans-serif;font-weight:500;font-size:12px;color:#a24a4a">Merci d'indiquer votre nom.</div></sc-if>
+</div>
+<div style="margin-bottom:clamp(20px,3vw,26px)">
+<label style="display:block;font-family:'Mulish',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8a8069;margin-bottom:10px">Serez-vous présent(e) ?</label>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<button onClick="{{ setYes }}" style="{{ yesStyle }}">Je serai présent(e)</button>
+<button onClick="{{ setNo }}" style="{{ noStyle }}">Je ne pourrai pas venir</button>
+</div>
+<sc-if value="{{ errAttend }}"><div style="margin-top:8px;font-family:'Mulish',sans-serif;font-weight:500;font-size:12px;color:#a24a4a">Merci d'indiquer si vous serez présent(e).</div></sc-if>
+</div>
+<div style="margin-bottom:clamp(24px,3.5vw,30px)">
+<label style="display:block;font-family:'Mulish',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8a8069;margin-bottom:10px">Un mot pour les mariés (facultatif)</label>
+<textarea value="{{ message }}" onChange="{{ onMessage }}" rows="3" placeholder="Vos vœux, une chanson à demander au DJ..." style="width:100%;padding:14px 16px;background:#fff;border:1px solid rgba(22,35,60,.18);border-radius:4px;font-family:'Mulish',sans-serif;font-size:15px;color:#16233C;outline:none;resize:vertical;min-height:88px;transition:border-color .2s,box-shadow .2s" style-focus="border-color:var(--accent,#C3A25C);box-shadow:0 0 0 3px rgba(195,162,92,.18)"></textarea>
+</div>
+<button onClick="{{ submit }}" style="width:100%;padding:17px;background:var(--accent,#C3A25C);color:#16233C;border:none;border-radius:4px;font-family:'Mulish',sans-serif;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .25s" style-hover="filter:brightness(1.05);transform:translateY(-2px);box-shadow:0 18px 32px -18px rgba(195,162,92,.9)">Envoyer ma réponse</button>
+</sc-if>
+</div>
+</div>
+</section>
+
+<footer style="background:linear-gradient(180deg,#0E1930,#0A1324);color:#F7F1E6;padding:clamp(64px,9vw,104px) clamp(20px,6vw,60px) 42px;text-align:center">
+<div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px">
+<div style="font-family:'Pinyon Script',cursive;color:var(--accent,#C3A25C);font-size:clamp(42px,7vw,62px);line-height:1">Sarah &amp; David</div>
+<div style="display:flex;align-items:center;gap:16px;color:rgba(247,241,230,.72);font-family:'Mulish',sans-serif;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase">
+<span style="width:28px;height:1px;background:var(--accent,#C3A25C);opacity:.6"></span>15 novembre 2025 · Douala, Cameroun<span style="width:28px;height:1px;background:var(--accent,#C3A25C);opacity:.6"></span>
+</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:13px">
+<div style="padding:14px;background:#F7F1E6;border-radius:10px;box-shadow:0 22px 44px -26px rgba(0,0,0,.6)">
+<img src="{{ qr }}" alt="QR code de partage du site" style="width:clamp(120px,26vw,148px);height:auto;display:block;border-radius:2px" />
+</div>
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(247,241,230,.6)">Scannez pour partager le site</span>
+</div>
+<div style="margin-top:18px;font-family:'Mulish',sans-serif;font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,241,230,.42)">Avec tout notre amour</div>
+</div>
+</footer>
+
+<sc-if value="{{ lightboxOpen }}">
+<div onClick="{{ closeLightbox }}" style="position:fixed;inset:0;z-index:200;background:rgba(9,16,32,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,60px);animation:ovIn .3s ease">
+<button onClick="{{ closeLightbox }}" aria-label="Fermer" style="position:absolute;top:22px;right:24px;background:none;border:none;color:#F7F1E6;cursor:pointer;padding:8px;opacity:.85" style-hover="opacity:1">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="19" y2="19" /><line x1="19" y1="5" x2="5" y2="19" /></svg>
+</button>
+<button onClick="{{ prevPhoto }}" aria-label="Précédent" style="position:absolute;left:clamp(10px,3vw,34px);top:50%;transform:translateY(-50%);background:rgba(247,241,230,.08);border:1px solid rgba(247,241,230,.2);color:#F7F1E6;cursor:pointer;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s" style-hover="background:rgba(247,241,230,.18)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="15 6 9 12 15 18" /></svg>
+</button>
+<button onClick="{{ nextPhoto }}" aria-label="Suivant" style="position:absolute;right:clamp(10px,3vw,34px);top:50%;transform:translateY(-50%);background:rgba(247,241,230,.08);border:1px solid rgba(247,241,230,.2);color:#F7F1E6;cursor:pointer;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s" style-hover="background:rgba(247,241,230,.18)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="9 6 15 12 9 18" /></svg>
+</button>
+<figure onClick="{{ stop }}" style="margin:0;max-width:min(560px,100%);display:flex;flex-direction:column;align-items:center;gap:16px">
+<img src="{{ lb.src }}" alt="{{ lb.label }}" style="max-width:100%;max-height:74vh;object-fit:contain;border-radius:6px;box-shadow:0 44px 88px -34px rgba(0,0,0,.8)" />
+<figcaption style="display:flex;align-items:center;gap:14px;color:rgba(247,241,230,.75)">
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase">{{ lb.label }}</span>
+<span style="width:4px;height:4px;border-radius:50%;background:var(--accent,#C3A25C)"></span>
+<span style="font-family:'Mulish',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:var(--accent,#C3A25C)">{{ lbCounter }}</span>
+</figcaption>
+</figure>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#C3A25C&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Style&quot;, &quot;options&quot;: [&quot;#C3A25C&quot;, &quot;#B76E79&quot;, &quot;#5E7D6A&quot;, &quot;#8C7B54&quot;] },
+  &quot;veil&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.72, &quot;min&quot;: 0.35, &quot;max&quot;: 0.9, &quot;step&quot;: 0.01, &quot;unit&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;heroVideoSrc&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;showCountdown&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot; }
+}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.rootRef = React.createRef();
+    this.state = {
+      cd: this._compute(),
+      isMobile: (typeof window !== 'undefined' && window.innerWidth < 860),
+      scrolled: false,
+      mobileOpen: false,
+      lightbox: null,
+      name: '',
+      attending: null,
+      message: '',
+      submitted: false,
+      error: ''
+    };
+    this._onResize = this._onResize.bind(this);
+    this._onScroll = this._onScroll.bind(this);
+    this._onKey = this._onKey.bind(this);
+    this._poster = this._mkPoster();
+    this._story = [ this._mkImg('#1b2c4a', '#33507a', 'La rencontre'), this._mkImg('#5f2733', '#a86a6a', 'La demande') ];
+    var tones = [['#1c2c4a','#33507a'],['#5f2733','#9a5560'],['#2a3550','#6f7f9c'],['#4a3b2a','#a98d5c'],['#1a2740','#2c405f'],['#6E2A3C','#b07a72'],['#33304a','#7d7180'],['#243247','#4a6486']];
+    this._photos = tones.map(function(t, i){ return { src: this._mkImg(t[0], t[1], ''), label: 'Souvenir n° ' + String(i+1).padStart(2,'0'), idx: i }; }.bind(this));
+    this._qr = this._mkQR();
+    this._nav = [
+      { label:'Accueil', href:'#accueil' },
+      { label:'Notre histoire', href:'#histoire' },
+      { label:'Programme', href:'#programme' },
+      { label:'Galerie', href:'#galerie' },
+      { label:'Dress code', href:'#dresscode' }
+    ];
+  }
+
+  // === MODIFIEZ LA DATE DU MARIAGE ICI (année, mois 0-11, jour, heure, minute) ===
+  _target(){ return new Date(2025, 10, 15, 14, 0, 0); }
+
+  _compute(){
+    var diff = this._target().getTime() - Date.now();
+    var past = diff <= 0;
+    if (past) diff = 0;
+    var dd = Math.floor(diff / 86400000);
+    var hh = Math.floor(diff / 3600000) % 24;
+    var mm = Math.floor(diff / 60000) % 60;
+    var ss = Math.floor(diff / 1000) % 60;
+    var p2 = function(n){ return String(n).padStart(2, '0'); };
+    return { d: past ? '00' : String(dd), h: p2(hh), m: p2(mm), s: p2(ss), past: past };
+  }
+
+  componentDidMount(){
+    this._timer = setInterval(function(){ this.setState({ cd: this._compute() }); }.bind(this), 1000);
+    window.addEventListener('resize', this._onResize, { passive: true });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('keydown', this._onKey);
+    this._applyVars();
+    this._initReveal();
+  }
+  componentDidUpdate(){ this._applyVars(); }
+  componentWillUnmount(){
+    clearInterval(this._timer);
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('keydown', this._onKey);
+    if (this._io) this._io.disconnect();
+  }
+
+  _applyVars(){
+    var el = this.rootRef.current; if (!el) return;
+    el.style.setProperty('--accent', this.props.accent || '#C3A25C');
+    el.style.setProperty('--veil', String(this.props.veil == null ? 0.72 : this.props.veil));
+  }
+
+  _initReveal(){
+    var root = this.rootRef.current; if (!root) return;
+    var nodes = root.querySelectorAll('[data-reveal]');
+    if (!('IntersectionObserver' in window)) { nodes.forEach(function(n){ n.setAttribute('data-shown',''); }); return; }
+    var self = this;
+    this._io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.setAttribute('data-shown',''); self._io.unobserve(e.target); } });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    nodes.forEach(function(n){ self._io.observe(n); });
+  }
+
+  _onResize(){ var m = window.innerWidth < 860; if (m !== this.state.isMobile) this.setState({ isMobile: m, mobileOpen: m ? this.state.mobileOpen : false }); }
+  _onScroll(){ var s = window.scrollY > window.innerHeight * 0.7; if (s !== this.state.scrolled) this.setState({ scrolled: s }); }
+  _onKey(e){ if (this.state.lightbox == null) return; if (e.key === 'Escape') this.setState({ lightbox: null }); else if (e.key === 'ArrowRight') this._step(1); else if (e.key === 'ArrowLeft') this._step(-1); }
+  _step(d){ var n = this._photos.length; this.setState(function(s){ return { lightbox: (s.lightbox + d + n) % n }; }); }
+
+  _submit(){
+    var nm = this.state.name.trim();
+    if (!nm) { this.setState({ error: 'name' }); return; }
+    if (!this.state.attending) { this.setState({ error: 'attend' }); return; }
+    this.setState({ submitted: true, error: '' });
+  }
+
+  _mkImg(c1, c2, tag){
+    var w = 900, h = 1120;
+    var bottom = tag ? "<text x='50%' y='" + (h-58) + "' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-size='34' fill='#F7F1E6' fill-opacity='.6'>" + tag + "</text>" : '';
+    var s = "<svg xmlns='http://www.w3.org/2000/svg' width='" + w + "' height='" + h + "' viewBox='0 0 " + w + " " + h + "'>"
+      + "<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='" + c1 + "'/><stop offset='1' stop-color='" + c2 + "'/></linearGradient>"
+      + "<radialGradient id='v' cx='.5' cy='.4' r='.85'><stop offset='0' stop-color='#ffffff' stop-opacity='.10'/><stop offset='1' stop-color='#000000' stop-opacity='.24'/></radialGradient></defs>"
+      + "<rect width='" + w + "' height='" + h + "' fill='url(#g)'/><rect width='" + w + "' height='" + h + "' fill='url(#v)'/>"
+      + "<rect x='30' y='30' width='" + (w-60) + "' height='" + (h-60) + "' fill='none' stroke='#F7F1E6' stroke-opacity='.30' stroke-width='2'/>"
+      + "<text x='50%' y='47%' text-anchor='middle' dominant-baseline='middle' font-family='Georgia, serif' font-style='italic' font-size='116' fill='#F7F1E6' fill-opacity='.34'>S &amp; D</text>"
+      + bottom + "</svg>";
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(s);
+  }
+
+  _mkPoster(){
+    var w = 1600, h = 1000;
+    var pts = [[.12,.18,60,.12],[.22,.32,26,.22],[.34,.14,40,.16],[.5,.24,80,.10],[.62,.16,30,.20],[.72,.30,50,.14],[.84,.20,34,.18],[.9,.4,70,.09],[.16,.5,20,.16],[.44,.44,24,.14],[.68,.5,18,.18],[.8,.6,44,.10],[.3,.62,28,.12],[.56,.7,20,.14]];
+    var circles = '';
+    pts.forEach(function(p){ circles += "<circle cx='" + Math.round(p[0]*w) + "' cy='" + Math.round(p[1]*h) + "' r='" + p[2] + "' fill='#C3A25C' fill-opacity='" + p[3] + "'/>"; });
+    var s = "<svg xmlns='http://www.w3.org/2000/svg' width='" + w + "' height='" + h + "' viewBox='0 0 " + w + " " + h + "'>"
+      + "<defs><linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#16233C'/><stop offset='.55' stop-color='#0E1930'/><stop offset='1' stop-color='#0A1324'/></linearGradient>"
+      + "<radialGradient id='glow' cx='.5' cy='.3' r='.62'><stop offset='0' stop-color='#C3A25C' stop-opacity='.30'/><stop offset='1' stop-color='#C3A25C' stop-opacity='0'/></radialGradient></defs>"
+      + "<rect width='" + w + "' height='" + h + "' fill='url(#sky)'/><rect width='" + w + "' height='" + h + "' fill='url(#glow)'/><g>" + circles + "</g></svg>";
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(s);
+  }
+
+  _mkQR(){
+    var N = 21, cell = 10, quiet = 2, size = (N + quiet*2) * cell;
+    var seed = 20251115;
+    var rnd = function(){ seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    var g = [];
+    for (var r = 0; r < N; r++) { g.push(new Array(N).fill(false)); }
+    var finder = function(rr, cc){ for (var i = 0; i < 7; i++) for (var j = 0; j < 7; j++){ var b = (i===0||i===6||j===0||j===6) || (i>=2&&i<=4&&j>=2&&j<=4); g[rr+i][cc+j] = b; } };
+    finder(0, 0); finder(0, N-7); finder(N-7, 0);
+    for (var k = 8; k < N-8; k++){ g[6][k] = (k % 2 === 0); g[k][6] = (k % 2 === 0); }
+    for (var a = 0; a < N; a++) for (var b2 = 0; b2 < N; b2++){
+      var inFinder = (a<8 && b2<8) || (a<8 && b2>=N-8) || (a>=N-8 && b2<8);
+      if (inFinder || a===6 || b2===6) continue;
+      if (g[a][b2]) continue;
+      g[a][b2] = rnd() > 0.52;
+    }
+    var rects = '';
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++){ if (g[y][x]) { rects += "<rect x='" + ((x+quiet)*cell) + "' y='" + ((y+quiet)*cell) + "' width='" + cell + "' height='" + cell + "'/>"; } }
+    var s = "<svg xmlns='http://www.w3.org/2000/svg' width='" + size + "' height='" + size + "' viewBox='0 0 " + size + " " + size + "'><rect width='" + size + "' height='" + size + "' fill='#F7F1E6'/><g fill='#16233C'>" + rects + "</g></svg>";
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(s);
+  }
+
+  renderVals(){
+    var st = this.state, self = this, scrolled = st.scrolled;
+    var navStyle = {
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 70,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: scrolled ? '12px clamp(18px,5vw,54px)' : '22px clamp(18px,5vw,54px)',
+      background: scrolled ? 'rgba(247,241,230,.92)' : 'transparent',
+      backdropFilter: scrolled ? 'saturate(160%) blur(12px)' : 'none',
+      WebkitBackdropFilter: scrolled ? 'saturate(160%) blur(12px)' : 'none',
+      boxShadow: scrolled ? '0 1px 0 rgba(22,35,60,.08),0 16px 34px -26px rgba(22,35,60,.5)' : 'none',
+      color: scrolled ? '#16233C' : '#F7F1E6',
+      transition: 'background .5s ease,padding .45s ease,color .45s ease,box-shadow .5s ease'
+    };
+    var tBase = { flex: '1 1 200px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '17px 16px', borderRadius: '3px', cursor: 'pointer', fontFamily: "'Mulish',sans-serif", fontWeight: 600, fontSize: '13px', letterSpacing: '.05em', transition: 'all .25s ease', textAlign: 'center', lineHeight: 1.2 };
+    var idle = Object.assign({}, tBase, { background: '#ffffff', color: '#16233C', border: '1px solid rgba(22,35,60,.16)' });
+    var yesStyle = st.attending === 'yes' ? Object.assign({}, tBase, { background: 'var(--accent,#C3A25C)', color: '#16233C', border: '1px solid var(--accent,#C3A25C)', boxShadow: '0 14px 28px -18px rgba(195,162,92,.9)' }) : idle;
+    var noStyle = st.attending === 'no' ? Object.assign({}, tBase, { background: '#16233C', color: '#F7F1E6', border: '1px solid #16233C' }) : idle;
+    var nm = st.name.trim();
+    var videoSrc = this.props.heroVideoSrc || '';
+
+    return {
+      rootRef: this.rootRef,
+      navStyle: navStyle,
+      nav: this._nav,
+      isMobile: st.isMobile,
+      notMobile: !st.isMobile,
+      mobileOpen: st.mobileOpen,
+      openMenu: function(){ self.setState({ mobileOpen: true }); },
+      closeMenu: function(){ self.setState({ mobileOpen: false }); },
+      poster: this._poster,
+      videoSrc: videoSrc,
+      hasVideo: !!videoSrc,
+      showCountdown: this.props.showCountdown == null ? true : this.props.showCountdown,
+      countdownIntro: st.cd.past ? 'Le grand jour est arrivé' : 'Jusqu\u2019au grand jour',
+      cd: st.cd,
+      storyA: this._story[0],
+      storyB: this._story[1],
+      photos: this._photos.map(function(p, i){ return Object.assign({}, p, { open: function(){ self.setState({ lightbox: i }); } }); }),
+      lightboxOpen: st.lightbox != null,
+      lb: st.lightbox != null ? this._photos[st.lightbox] : { src: '', label: '' },
+      lbCounter: st.lightbox != null ? (String(st.lightbox+1).padStart(2,'0') + ' / ' + String(this._photos.length).padStart(2,'0')) : '',
+      closeLightbox: function(){ self.setState({ lightbox: null }); },
+      prevPhoto: function(e){ if (e && e.stopPropagation) e.stopPropagation(); self._step(-1); },
+      nextPhoto: function(e){ if (e && e.stopPropagation) e.stopPropagation(); self._step(1); },
+      stop: function(e){ if (e && e.stopPropagation) e.stopPropagation(); },
+      qr: this._qr,
+      name: st.name,
+      message: st.message,
+      onName: function(e){ var v = e.target.value; self.setState({ name: v, error: (st.error === 'name' && v.trim()) ? '' : st.error }); },
+      onMessage: function(e){ self.setState({ message: e.target.value }); },
+      setYes: function(){ self.setState({ attending: 'yes', error: st.error === 'attend' ? '' : st.error }); },
+      setNo: function(){ self.setState({ attending: 'no', error: st.error === 'attend' ? '' : st.error }); },
+      yesStyle: yesStyle,
+      noStyle: noStyle,
+      submit: function(){ self._submit(); },
+      errName: st.error === 'name',
+      errAttend: st.error === 'attend',
+      submitted: st.submitted,
+      notSubmitted: !st.submitted,
+      confTitle: st.attending === 'no' ? 'Merci pour votre réponse' : 'Votre présence est confirmée',
+      confMsg: st.attending === 'no'
+        ? (nm + ', votre présence nous manquera. Nous penserons très fort à vous le 15 novembre.')
+        : (nm + ', nous avons hâte de célébrer ce grand jour à vos côtés, le 15 novembre à Douala.'),
+      resetForm: function(){ self.setState({ submitted: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

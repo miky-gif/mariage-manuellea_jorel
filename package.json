@@ -1,0 +1,19 @@
+{
+  "name": "mariage-manuela-jorel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site web du mariage de Manuela & Jorel — 6 fevrier 2027, Yaounde",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "images": "node scripts/build-images.js",
+    "qr": "node scripts/generate-qr.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.33.5",
+    "qrcode": "^1.5.4"
+  }
+}
