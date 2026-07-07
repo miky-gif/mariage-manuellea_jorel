@@ -1,8 +1,6 @@
-# Empeche Vercel d'utiliser le serveur local comme fonction (cause du crash 500).
-# server.js ne sert qu'au developpement local ; en ligne, c'est api/rsvp.js qui gere le RSVP.
-server.js
-
-# Fichiers/dossiers inutiles en production (allege le deploiement)
+# Fichiers/dossiers de developpement inutiles en production (allege le deploiement).
+# Le serveur local (dev-server.js) ne sert qu'en local ; en ligne le site est statique.
+dev-server.js
 data
 images
 scripts
