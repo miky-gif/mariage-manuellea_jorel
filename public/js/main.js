@@ -172,6 +172,10 @@
   });
 
   /* ---------- RSVP ---------- */
+  // MODE DÉMO : true = le formulaire affiche la confirmation SANS enregistrer (présentation visuelle).
+  // Passer à false quand le backend d'enregistrement des réponses sera prêt.
+  var DEMO_MODE = true;
+
   var attending = null;
   var btnYes = document.getElementById('btnYes');
   var btnNo = document.getElementById('btnNo');
@@ -204,6 +208,15 @@
     submitBtn.disabled = true;
     var prevLabel = submitBtn.textContent;
     submitBtn.textContent = 'Envoi en cours...';
+
+    // Mode démo : on affiche simplement la confirmation, sans appeler le backend.
+    if (DEMO_MODE) {
+      setTimeout(function () {
+        submitBtn.disabled = false; submitBtn.textContent = prevLabel;
+        showConfirmation(name);
+      }, 600);
+      return;
+    }
 
     fetch('/api/rsvp', {
       method: 'POST',
