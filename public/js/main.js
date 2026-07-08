@@ -4,6 +4,16 @@
 (function () {
   'use strict';
 
+  /* ---------- Toujours ouvrir le site sur la 1re section (hero / video) ----------
+     Empeche le navigateur de restaurer une position de defilement precedente
+     (ex. la section RSVP consultee lors d'une visite anterieure).
+     On respecte quand meme les liens-ancres volontaires (#programme, #rsvp...). */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash) {
+    window.scrollTo(0, 0);
+    window.addEventListener('load', function () { if (!location.hash) window.scrollTo(0, 0); });
+  }
+
   /* ---------- Compte a rebours (6 fevrier 2027, 10h00, heure de Yaounde UTC+1) ---------- */
   var TARGET = new Date('2027-02-06T10:00:00+01:00').getTime();
   var el = {
