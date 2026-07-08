@@ -4,11 +4,26 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#FDF6F0" />
-<!-- Toujours ouvrir le site sur le hero (video), meme sur mobile.
-     Doit s'executer le plus tot possible ET gerer le "pageshow" (cache mobile / retour arriere). -->
+<!-- Toujours ouvrir le site sur le hero (video), quel que soit l'appareil/navigateur.
+     Sur mobile, le navigateur restaure souvent la position APRES le chargement :
+     on maintient donc le haut de page pendant ~1,5 s, jusqu'a la 1re action de l'utilisateur. -->
 <script>
+(function () {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  window.addEventListener('pageshow', function () { if (!location.hash) window.scrollTo(0, 0); });
+  var userActed = false;
+  ['touchstart', 'pointerdown', 'wheel', 'keydown'].forEach(function (ev) {
+    addEventListener(ev, function () { userActed = true; }, { once: true, passive: true });
+  });
+  function holdTop(ms) {
+    var start = Date.now();
+    (function tick() {
+      if (userActed) return;                 // l'utilisateur defile : on le laisse tranquille
+      window.scrollTo(0, 0);
+      if (Date.now() - start < ms) requestAnimationFrame(tick);
+    })();
+  }
+  addEventListener('pageshow', function () { userActed = false; holdTop(1500); });
+})();
 </script>
 <title>Manuela &amp; Jorel · 6 février 2027 · Yaoundé</title>
 <meta name="description" content="Manuela &amp; Jorel se marient le 6 février 2027 aux Jardins de René, Yaoundé. Confirmez votre présence." />
