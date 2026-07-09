@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Mulish:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/styles.css?v=4" />
+<link rel="stylesheet" href="css/styles.css?v=8" />
 <!-- Si le JavaScript est desactive, on affiche tout le contenu (pas d'animation d'apparition) -->
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -70,7 +70,7 @@
 <header class="hero" id="accueil">
   <div class="hero__media">
     <video class="hero__video" autoplay loop muted playsinline preload="none" poster="assets/images/poster.jpg">
-      <source src="assets/video/save-the-date.mp4" type="video/mp4" />
+      <source src="assets/video/save-the-date.mp4?v=2" type="video/mp4" />
     </video>
     <div class="hero__veil"></div>
     <div class="hero__vignette"></div>
@@ -101,7 +101,17 @@
   <a href="#histoire" class="hero__scroll">Découvrir
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
   </a>
+
 </header>
+
+<!-- Bouton son FLOTTANT : la video demarre en muet (obligatoire pour l'autoplay).
+     Le son s'active au 1er geste de l'invite ou via ce bouton, et PERSISTE sur
+     toute la page tant qu'il est active. Le bouton reste accessible partout. -->
+<button id="soundBtn" class="hero__sound" aria-label="Activer le son de la vidéo" aria-pressed="false">
+  <svg class="ic ic-off" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5 6 9H3v6h3l5 4z"/><line x1="17" y1="9" x2="23" y2="15"/><line x1="23" y1="9" x2="17" y2="15"/></svg>
+  <svg class="ic ic-on" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8 8 0 0 1 0 12"/></svg>
+  <span id="soundTx">Activer le son</span>
+</button>
 
 <!-- ===================== NOTRE HISTOIRE ===================== -->
 <section class="story" id="histoire">
@@ -119,7 +129,7 @@
       </div>
       <div class="story__text">
         <h3>La rencontre</h3>
-        <p>Tout a commencé lors d'une soirée que Jorel organisait. Ce soir-là, Manuela ne devait même pas venir : elle ne se sentait pas bien et comptait rester chez elle. Mais une de ses cousines a insisté avec une phrase qui, sans le savoir, allait tout changer : <em>« Viens… ça pourrait même changer ta vie. »</em></p>
+        <p>Tout a commencé lors d'une soirée que Jorel organisait. Ce soir-là, Manuela ne devait même pas venir : elle ne se sentait pas bien et comptait rester chez elle. Mais sa cousines Gaelle a insisté avec une phrase qui, sans le savoir, allait tout changer : <em>« Viens… ça pourrait même changer ta vie. »</em></p>
         <p>Elle est arrivée un peu en retard, parmi les personnes venues assurer le service. Il a suffi d'un regard. Pour Jorel, ce ne fut pas seulement de l'attirance, mais une évidence — comme si son cœur reconnaissait quelqu'un que ses yeux rencontraient pourtant pour la première fois. <em>« C'est elle »</em>, s'est-il dit.</p>
         <p>Il a attendu qu'elle soit seule pour aller lui parler. La conversation fut simple, naturelle, sans effort, comme s'ils reprenaient une discussion interrompue depuis longtemps. À la fin de la soirée, il lui a demandé son numéro… et ils ont continué à parler pendant des heures.</p>
       </div>
@@ -161,11 +171,11 @@
         <div class="tl__line"><span class="tl__dot"></span></div>
         <div class="tl__body"><div class="tl__title">Cocktail</div><div class="tl__desc">Vin d'honneur &amp; séance photos dans les jardins</div></div>
       </div>
-      <div class="tl">
+      <!-- <div class="tl">
         <div class="tl__time"><span class="tl__h">14</span><span class="tl__m">H00</span></div>
         <div class="tl__line"><span class="tl__dot"></span></div>
         <div class="tl__body"><div class="tl__title">Déjeuner de réception</div><div class="tl__desc">Déjeuner assis &amp; discours des proches</div></div>
-      </div>
+      </div> -->
       <div class="tl tl--last">
         <div class="tl__time"><span class="tl__h">18</span><span class="tl__m">H00</span></div>
         <div class="tl__line"><span class="tl__dot"></span></div>
@@ -329,6 +339,6 @@
   </figure>
 </div>
 
-<script src="js/main.js?v=4"></script>
+<script src="js/main.js?v=8"></script>
 </body>
 </html>

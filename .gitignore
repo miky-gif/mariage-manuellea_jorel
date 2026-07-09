@@ -3,5 +3,11 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Les reponses RSVP sont des donnees locales : a sauvegarder, pas a versionner
+# Secrets locaux : ne JAMAIS versionner
+.env
+
+# Anciennes donnees locales (SQLite / JSON), si presentes
+data/*.db
+data/*.db-wal
+data/*.db-shm
 data/rsvps.json

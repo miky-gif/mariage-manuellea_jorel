@@ -6,39 +6,56 @@ le **6 février 2027 à 10h00**, aux **Jardins de René, Yaoundé (Cameroun)**.
 Conçu pour être **léger et rapide sur mobile** (3G/4G), fidèle à la maquette Claude Design
 et à la palette *Dusty Pink / Coral / Peach / Nude / Champagne*.
 
-> **En local** : `npm start` → serveur Node (`server.js`) qui enregistre les réponses dans `data/rsvps.json`.
-> **En ligne sur Vercel** : le site est servi en statique et le RSVP passe par la fonction
-> `api/rsvp.js` qui enregistre dans une base **Upstash Redis** (voir section « Déploiement »).
+> **Architecture** : une application Node (`dev-server.js`) qui sert le site **et** l'API RSVP,
+> avec une base **MongoDB** (externe) via la variable `MONGODB_URI`. La base étant hébergée
+> par MongoDB Atlas, l'application tourne sur **n'importe quel hébergeur Node**
+> (LWS Node.js, Render, Railway, VPS…), sans dépendre du disque de l'hébergeur.
 
 ---
 
-## Déploiement sur Vercel
+## Base de données : MongoDB Atlas (gratuit)
 
-Vercel n'exécute pas de serveur permanent : `server.js` n'y fonctionne donc pas.
-Le site utilise à la place la fonction serverless `api/rsvp.js` + une base Redis.
+### 1. Créer la base (une seule fois)
+1. Créez un compte sur **https://www.mongodb.com/atlas** → créez un **cluster gratuit (M0)**.
+2. **Database Access** → *Add New Database User* → notez l'utilisateur + mot de passe.
+3. **Network Access** → *Add IP Address* → **Allow access from anywhere** (`0.0.0.0/0`).
+4. **Database → Connect → Drivers** → copiez la **chaîne de connexion** (`mongodb+srv://…`)
+   et remplacez `<password>` par le mot de passe de l'étape 2.
 
-1. **Envoyer le code sur GitHub**
-   ```bash
-   git add .
-   git commit -m "RSVP compatible Vercel (serverless + Upstash Redis)"
-   git push
-   ```
-2. **Créer la base de données** (stockage des réponses) :
-   Dashboard Vercel → projet → onglet **Storage** → **Create Database** →
-   **Upstash for Redis** (ou **KV**) → région Europe → **Create**, puis **Connect** au projet
-   (environnement Production). Les variables `KV_REST_API_URL` / `KV_REST_API_TOKEN`
-   (ou `UPSTASH_REDIS_REST_URL` / `_TOKEN`) sont ajoutées automatiquement.
-3. **(Optionnel) Consulter les réponses** en attendant le tableau de bord :
-   Settings → **Environment Variables** → ajouter `ADMIN_TOKEN` = un mot de passe secret.
-   Puis ouvrir `https://VOTRE-SITE.vercel.app/api/rsvp?token=VOTRE_SECRET`.
-4. **Réglages du projet** : Framework Preset = **Other**, Output Directory = **public**
-   (déjà fixé par `vercel.json`), Root Directory = racine du dépôt.
-5. **Redéployer** (Deployments → Redeploy) **après** avoir connecté la base,
-   pour que la fonction reçoive les variables d'environnement.
+### 2. Configurer l'application
+Copiez le fichier **`.env.example`** en **`.env`** et remplissez :
+```
+MONGODB_URI=mongodb+srv://UTILISATEUR:MOTDEPASSE@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+ADMIN_TOKEN=un-mot-de-passe-secret     # protège le tableau de bord /admin.html
+```
+> En local, `.env` suffit. En ligne, ces mêmes valeurs se mettent dans les **variables
+> d'environnement** de l'hébergeur (pas de fichier `.env` en production).
 
-> ⚠️ La vidéo `save-the-date.mp4` (~98 Mo) est trop lourde pour Vercel (bande passante limitée
-> à 100 Go/mois sur l'offre gratuite). À compresser (~10–15 Mo) ou à héberger sur un service
-> vidéo externe avant la mise en ligne définitive.
+### Tableau de bord
+- **En local** : `npm start`, puis **http://localhost:3000/admin.html** (mot de passe = `ADMIN_TOKEN`, ou `admin` si non défini).
+- **En ligne** : **`https://VOTRE-SITE/admin.html`**.
+
+Il affiche : présents / absents, la liste complète (nom, téléphone, présence, message, date
+à l'heure de Yaoundé), la **recherche**, les **filtres**, l'**export PDF** et la **suppression**.
+
+---
+
+## Mise en ligne (hébergeur Node)
+
+Comme la base est chez MongoDB Atlas, **n'importe quel hébergeur qui exécute Node.js** convient
+(LWS « Hébergement Node.js », Render, Railway, un VPS…), **sans disque persistant requis**.
+
+Étapes types :
+1. Envoyer le code sur GitHub (`git add -A && git commit -m "..." && git push`).
+2. Sur l'hébergeur, créer une **application Node** reliée au dépôt :
+   - Installation : `npm install` · Démarrage : `npm start`
+3. Définir les **variables d'environnement** : `MONGODB_URI` et `ADMIN_TOKEN`
+   (le `PORT` est fourni automatiquement par l'hébergeur).
+
+> Le formulaire enregistre pour de vrai (`DEMO_MODE = false` dans `public/js/main.js`).
+> Pour une simple démo visuelle sans base, repasser `DEMO_MODE = true`.
+
+> ⚠️ La vidéo `save-the-date.mp4` est déjà compressée (~18 Mo, 720p).
 
 ---
 
@@ -63,9 +80,8 @@ Pour l'arrêter : `Ctrl + C` dans le terminal.
    (Windows : tapez `ipconfig` et repérez « Adresse IPv4 », ex. `192.168.1.20`).
 2. Sur le téléphone, ouvrez `http://192.168.1.20:3000`.
 
-> Aucune installation n'est nécessaire pour lancer le site : le serveur
-> `server.js` n'utilise que Node.js (aucune dépendance). `npm install`
-> ne sert qu'aux outils d'optimisation d'images et de QR code (voir plus bas).
+> Avant le premier lancement : `npm install` (installe le pilote MongoDB), puis créez
+> votre fichier `.env` (voir « Base de données : MongoDB Atlas » ci-dessus).
 
 ---
 
@@ -125,23 +141,12 @@ déjà légères (moins de ~200 Ko chacune).
 
 ## 4. Les réponses au formulaire (RSVP)
 
-Chaque réponse envoyée par un invité est enregistrée dans :
+Chaque réponse est enregistrée dans **MongoDB** (collection `rsvps`) et contient :
+- **name** — nom complet · **phone** — téléphone · **attending** — `"oui"`/`"non"`
+- **message** — mot facultatif · **date** — date/heure (ISO)
 
-```
-data/rsvps.json
-```
-
-Chaque entrée contient :
-- **name** — nom complet
-- **phone** — numéro de téléphone
-- **attending** — présence : `"oui"` ou `"non"`
-- **message** — mot facultatif aux mariés
-- **date** — date et heure de la réponse (format ISO, ex. `2027-01-15T14:32:00.000Z`)
-
-Vous pouvez ouvrir ce fichier avec un simple éditeur de texte pour consulter les réponses.
-
-> **Prochaine étape :** un tableau de bord administrateur permettra de visualiser
-> et d'exporter ces réponses plus confortablement.
+Pour les consulter : ouvrez le **tableau de bord** (`/admin.html`) — voir la section
+« Base de données & tableau de bord » ci-dessus (recherche, filtres, export PDF, suppression).
 
 ---
 
@@ -172,16 +177,18 @@ Tant qu'il n'existe pas, un encadré « QR code — à générer » s'affiche à
 
 ```
 mariage manuellea_jorel/
-├── server.js              Serveur (Node pur) : sert le site + enregistre les RSVP
+├── dev-server.js          Application Node : sert le site + API RSVP
+├── lib/
+│   └── db.js              Accès à la base MongoDB (add / all / remove)
+├── .env.example           Modèle de configuration (à copier en .env)
 ├── package.json
 ├── images/                Photos d'origine (sources)
-├── data/
-│   └── rsvps.json         Réponses des invités (créé au premier envoi)
 ├── scripts/
 │   ├── build-images.js    Optimisation des photos  (npm run images)
 │   └── generate-qr.js     Génération du QR code     (npm run qr -- <url>)
 └── public/                Ce qui est envoyé au navigateur
     ├── index.html
+    ├── admin.html         Tableau de bord admin
     ├── css/styles.css
     ├── js/main.js
     └── assets/

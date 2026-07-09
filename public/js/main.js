@@ -6,6 +6,52 @@
 
   /* (L'ouverture systematique sur le hero est geree par un script en <head> de index.html) */
 
+  /* ---------- Son de la video du hero ----------
+     La video demarre en muet (obligatoire pour l'autoplay des navigateurs).
+     Le son s'active au 1er geste de l'invite (autorise apres interaction) ou via le bouton.
+     Il se coupe quand le hero n'est plus a l'ecran, et revient au retour. */
+  (function heroSound() {
+    var video = document.querySelector('.hero__video');
+    var btn = document.getElementById('soundBtn');
+    if (!video || !btn) return;
+    var tx = document.getElementById('soundTx');
+    var wantsSound = false;
+
+    function apply() {
+      video.muted = !wantsSound;   // le son persiste sur toute la page tant qu'il est active
+      if (!video.muted) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+      btn.classList.toggle('is-on', wantsSound);
+      btn.setAttribute('aria-pressed', wantsSound ? 'true' : 'false');
+      btn.setAttribute('aria-label', wantsSound ? 'Couper le son de la vidéo' : 'Activer le son de la vidéo');
+      if (tx) tx.textContent = wantsSound ? 'Son activé' : 'Activer le son';
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      wantsSound = !wantsSound;
+      apply();
+    });
+
+    // Activation auto DES QUE l'invite touche l'ecran (meme pour scroller), clique ou tape.
+    // (sauf si ce 1er geste vise deja le bouton, qui se gere lui-meme)
+    var armed = true;
+    function autoOn(e) {
+      if (!armed) return;
+      if (e && e.target && btn.contains(e.target)) return; // clic sur le bouton -> gere par son handler
+      armed = false;
+      if (!wantsSound) { wantsSound = true; apply(); }
+      // on retire les ecouteurs une fois le son active
+      ['touchstart', 'pointerdown', 'mousedown', 'click', 'keydown', 'wheel'].forEach(function (ev) {
+        window.removeEventListener(ev, autoOn);
+      });
+    }
+    ['touchstart', 'pointerdown', 'mousedown', 'click', 'keydown', 'wheel'].forEach(function (ev) {
+      window.addEventListener(ev, autoOn, { passive: true });
+    });
+
+    apply();
+  })();
+
   /* ---------- Compte a rebours (6 fevrier 2027, 10h00, heure de Yaounde UTC+1) ---------- */
   var TARGET = new Date('2027-02-06T10:00:00+01:00').getTime();
   var el = {
@@ -175,8 +221,8 @@
 
   /* ---------- RSVP ---------- */
   // MODE DÉMO : true = le formulaire affiche la confirmation SANS enregistrer (présentation visuelle).
-  // Passer à false quand le backend d'enregistrement des réponses sera prêt.
-  var DEMO_MODE = true;
+  // false = enregistrement réel dans la base de données (via /api/rsvp).
+  var DEMO_MODE = false;
 
   var attending = null;
   var btnYes = document.getElementById('btnYes');

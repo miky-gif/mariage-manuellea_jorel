@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Tableau de bord · Manuela &amp; Jorel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --surface:#FDF6F0; --champagne:#F5E6D3; --nude:#EDD5C0; --peach:#F2B097;
+    --primary:#E8A598; --coral:#E07560; --gold:#C9A96E; --deep:#7A4040; --text:#6E5652;
+    --line:rgba(122,64,64,.14);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--text);font-family:'Mulish',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;color:var(--deep);margin:0}
+  button{font-family:inherit;cursor:pointer}
+  input,select{font-family:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:clamp(18px,4vw,36px)}
+
+  /* ----- Connexion ----- */
+  .login{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .login__card{width:100%;max-width:380px;background:#FBF3EA;border:1px solid var(--line);border-radius:14px;box-shadow:0 40px 90px -50px rgba(122,64,64,.5);overflow:hidden}
+  .login__top{height:4px;background:linear-gradient(90deg,transparent,var(--coral),transparent)}
+  .login__body{padding:clamp(28px,5vw,40px);text-align:center}
+  .login__script{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--coral);font-size:20px}
+  .login h1{font-size:clamp(26px,5vw,34px);margin:6px 0 4px}
+  .login p{font-size:13px;color:#9a8069;margin:0 0 22px}
+  .field{text-align:left;margin-bottom:16px}
+  .field label{display:block;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a8069;margin-bottom:8px}
+  .field input{width:100%;padding:13px 15px;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:15px;color:var(--deep);outline:none;transition:border-color .2s,box-shadow .2s}
+  .field input:focus{border-color:var(--coral);box-shadow:0 0 0 3px rgba(224,117,96,.15)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;background:var(--coral);color:#fff;font-weight:700;font-size:13px;letter-spacing:.06em;padding:13px 20px;border-radius:8px;transition:filter .2s,transform .2s,box-shadow .2s}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+  .btn--full{width:100%}
+  .btn--ghost{background:#fff;color:var(--deep);border:1px solid var(--line)}
+  .btn--ghost:hover{border-color:var(--coral);filter:none}
+  .btn--sm{padding:9px 14px;font-size:12px;border-radius:7px}
+  .msg{font-size:13px;margin-top:14px;min-height:18px}
+  .msg--err{color:#b0524a}
+
+  /* ----- En-tete ----- */
+  .head{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:22px}
+  .head__title .k{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--coral);font-size:16px}
+  .head__title h1{font-size:clamp(26px,4vw,38px);line-height:1.05}
+  .head__actions{display:flex;flex-wrap:wrap;gap:10px}
+
+  /* ----- Statistiques ----- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px}
+  .stat{background:#FBF3EA;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .stat__n{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,5vw,44px);line-height:1;color:var(--deep)}
+  .stat__l{font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a8069;margin-top:8px}
+  .stat--yes .stat__n{color:#3f8a5b}
+  .stat--no .stat__n{color:var(--coral)}
+
+  /* ----- Barre d'outils ----- */
+  .tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+  .tools input[type=search]{flex:1 1 220px;min-width:0;padding:11px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--deep);outline:none}
+  .tools input[type=search]:focus{border-color:var(--coral);box-shadow:0 0 0 3px rgba(224,117,96,.15)}
+  .tools select{padding:11px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--deep);outline:none}
+
+  /* ----- Tableau ----- */
+  .tablewrap{background:#FBF3EA;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  thead th{text-align:left;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9a8069;padding:14px 16px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--champagne)}
+  tbody td{padding:14px 16px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(242,176,151,.10)}
+  .name{font-weight:700;color:var(--deep)}
+  .phone{white-space:nowrap;font-variant-numeric:tabular-nums}
+  .msgcell{max-width:320px;color:#6E5652}
+  .date{white-space:nowrap;color:#9a8069;font-size:13px}
+  .badge{display:inline-block;font-weight:700;font-size:11px;letter-spacing:.06em;padding:5px 11px;border-radius:999px;white-space:nowrap}
+  .badge--yes{background:rgba(63,138,91,.14);color:#337049}
+  .badge--no{background:rgba(224,117,96,.16);color:#b0503f}
+  .del{background:none;border:1px solid var(--line);color:#b0524a;border-radius:7px;padding:7px 10px;font-size:12px;font-weight:600}
+  .del:hover{border-color:#b0524a;background:rgba(176,82,74,.08)}
+  .empty{padding:48px 20px;text-align:center;color:#9a8069}
+  .empty h3{font-size:24px;margin-bottom:6px}
+  .foot{margin-top:16px;font-size:12px;color:#b09a86;text-align:center}
+  .hidden{display:none!important}
+
+  /* ----- Mobile : le tableau devient des cartes (plus de defilement horizontal) ----- */
+  @media (max-width:640px){
+    .tablewrap{background:transparent;border:none;border-radius:0;overflow:visible}
+    .scroll{overflow:visible}
+    table{min-width:0}
+    thead{display:none}
+    table,tbody,tr,td{display:block;width:100%}
+    tbody tr{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;background:#FBF3EA;overflow:hidden;box-shadow:0 12px 26px -22px rgba(122,64,64,.5)}
+    tbody tr:hover{background:#FBF3EA}
+    tbody td{border:none;border-bottom:1px solid var(--line);padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:right;font-size:14px}
+    tbody td::before{content:attr(data-label);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a8069;text-align:left;flex:0 0 auto}
+    tbody td.name{font-size:17px;background:var(--champagne)}
+    .msgcell{max-width:none}
+    tbody td:last-child{border-bottom:none;padding-top:14px}
+    tbody td:last-child::before{display:none}
+    tbody td:last-child .del{width:100%;padding:12px;font-size:13px}
+    .foot{text-align:left;padding:0 4px}
+  }
+
+  /* ----- Impression / Export PDF ----- */
+  #report{display:none}
+  #report .rep__brand{font-family:'Cormorant Garamond',serif;font-size:30px;color:#7A4040}
+  #report .rep__sub{font-size:13px;color:#7a6a60;margin-top:2px}
+  #report .rep__meta{font-size:11px;color:#9a8069;margin:12px 0 18px;padding-bottom:12px;border-bottom:2px solid #e2cdb6}
+  #report table{width:100%;border-collapse:collapse;font-size:11px;font-family:'Mulish',sans-serif;color:#3a2b28}
+  #report th{text-align:left;background:#F5E6D3;color:#7A4040;padding:7px 9px;border:1px solid #e2cdb6;font-size:10px;text-transform:uppercase;letter-spacing:.05em}
+  #report td{padding:6px 9px;border:1px solid #e6d8c8;vertical-align:top}
+  #report tr:nth-child(even) td{background:#faf3ea}
+  @media print{
+    @page{margin:14mm}
+    body{background:#fff}
+    #login,#dash{display:none!important}
+    #report{display:block}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CONNEXION ============ -->
+<div class="login" id="login">
+  <div class="login__card">
+    <div class="login__top"></div>
+    <div class="login__body">
+      <div class="login__script">Manuela &amp; Jorel</div>
+      <h1>Tableau de bord</h1>
+      <p>Accès réservé aux mariés</p>
+      <div class="field">
+        <label for="token">Mot de passe</label>
+        <input type="password" id="token" placeholder="Votre code d'accès" autocomplete="current-password" />
+      </div>
+      <button class="btn btn--full" id="loginBtn">Se connecter</button>
+      <div class="msg msg--err" id="loginMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TABLEAU DE BORD ============ -->
+<div class="wrap hidden" id="dash">
+  <div class="head">
+    <div class="head__title">
+      <div class="k">Réponses des invités</div>
+      <h1>Manuela &amp; Jorel</h1>
+    </div>
+    <div class="head__actions">
+      <button class="btn btn--ghost btn--sm" id="refreshBtn">↻ Actualiser</button>
+      <button class="btn btn--sm" id="exportBtn">⬇ Exporter en PDF</button>
+      <button class="btn btn--ghost btn--sm" id="logoutBtn">Se déconnecter</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat__n" id="sTotal">0</div><div class="stat__l">Réponses</div></div>
+    <div class="stat stat--yes"><div class="stat__n" id="sYes">0</div><div class="stat__l">Présents</div></div>
+    <div class="stat stat--no"><div class="stat__n" id="sNo">0</div><div class="stat__l">Absents</div></div>
+  </div>
+
+  <div class="tools">
+    <input type="search" id="search" placeholder="Rechercher un nom, un téléphone…" />
+    <select id="filter">
+      <option value="all">Toutes les réponses</option>
+      <option value="oui">Présents uniquement</option>
+      <option value="non">Absents uniquement</option>
+    </select>
+  </div>
+
+  <div class="tablewrap">
+    <div class="scroll">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Nom &amp; prénom</th>
+            <th>Téléphone</th>
+            <th>Présence</th>
+            <th>Message</th>
+            <th>Reçu le</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="empty">
+      <h3>Aucune réponse pour le moment</h3>
+      <p>Les confirmations des invités apparaîtront ici.</p>
+    </div>
+  </div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<!-- Rapport imprimable (visible uniquement a l'impression / export PDF) -->
+<div id="report"></div>
+
+<script>
+(function () {
+  'use strict';
+  var TKEY = 'mj_admin_token';
+  var api = '/api/rsvp';
+  var all = [];
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtDate(iso) {
+    try {
+      return new Date(iso).toLocaleString('fr-FR', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Douala'
+      });
+    } catch (_) { return iso || ''; }
+  }
+
+  /* ---------- Connexion ---------- */
+  function showLogin(msg) {
+    $('dash').classList.add('hidden');
+    $('login').classList.remove('hidden');
+    $('loginMsg').textContent = msg || '';
+    $('token').focus();
+  }
+  function showDash() {
+    $('login').classList.add('hidden');
+    $('dash').classList.remove('hidden');
+  }
+  function token() { return sessionStorage.getItem(TKEY) || ''; }
+
+  function load() {
+    fetch(api, { headers: { 'x-admin-token': token() } })
+      .then(function (r) {
+        if (r.status === 401) { sessionStorage.removeItem(TKEY); showLogin('Mot de passe incorrect.'); throw 'auth'; }
+        if (r.status === 503) { throw 'La base de données n\'est pas encore connectée (voir le guide de déploiement).'; }
+        if (!r.ok) throw 'Erreur serveur (' + r.status + ').';
+        return r.json();
+      })
+      .then(function (data) {
+        all = (data.rsvps || []).slice().sort(function (a, b) {
+          return new Date(b.date) - new Date(a.date); // plus recentes en premier
+        });
+        showDash();
+        render();
+      })
+      .catch(function (e) {
+        if (e === 'auth') return;
+        showLogin(typeof e === 'string' ? e : 'Impossible de charger les réponses.');
+      });
+  }
+
+  $('loginBtn').addEventListener('click', function () {
+    var v = $('token').value.trim();
+    if (!v) { $('loginMsg').textContent = 'Merci de saisir le mot de passe.'; return; }
+    sessionStorage.setItem(TKEY, v);
+    $('loginMsg').textContent = '';
+    load();
+  });
+  $('token').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('loginBtn').click(); });
+  $('logoutBtn').addEventListener('click', function () { sessionStorage.removeItem(TKEY); showLogin(''); });
+  $('refreshBtn').addEventListener('click', load);
+  $('search').addEventListener('input', render);
+  $('filter').addEventListener('change', render);
+  $('exportBtn').addEventListener('click', exportPdf);
+
+  /* ---------- Affichage ---------- */
+  function filtered() {
+    var q = $('search').value.trim().toLowerCase();
+    var f = $('filter').value;
+    return all.filter(function (e) {
+      if (f !== 'all' && e.attending !== f) return false;
+      if (!q) return true;
+      return (String(e.name || '') + ' ' + String(e.phone || '') + ' ' + String(e.message || '')).toLowerCase().indexOf(q) !== -1;
+    });
+  }
+
+  function render() {
+    var yes = all.filter(function (e) { return e.attending === 'oui'; }).length;
+    var no = all.filter(function (e) { return e.attending === 'non'; }).length;
+    $('sTotal').textContent = all.length;
+    $('sYes').textContent = yes;
+    $('sNo').textContent = no;
+
+    var list = filtered();
+    var rows = $('rows'), empty = $('empty');
+    rows.innerHTML = '';
+
+    if (!all.length) { empty.classList.remove('hidden'); document.getElementById('table').classList.add('hidden'); }
+    else { empty.classList.add('hidden'); document.getElementById('table').classList.remove('hidden'); }
+
+    list.forEach(function (e) {
+      var tr = document.createElement('tr');
+      var badge = e.attending === 'oui'
+        ? '<span class="badge badge--yes">Présent(e)</span>'
+        : '<span class="badge badge--no">Absent(e)</span>';
+      tr.innerHTML =
+        '<td class="name" data-label="Nom">' + esc(e.name) + '</td>' +
+        '<td class="phone" data-label="Téléphone">' + esc(e.phone) + '</td>' +
+        '<td data-label="Présence">' + badge + '</td>' +
+        '<td class="msgcell" data-label="Message">' + (e.message ? esc(e.message) : '<span style="color:#c3b3a3">—</span>') + '</td>' +
+        '<td class="date" data-label="Reçu le">' + esc(fmtDate(e.date)) + '</td>' +
+        '<td data-label=""><button class="del" data-id="' + esc(e.id) + '">Supprimer</button></td>';
+      rows.appendChild(tr);
+    });
+
+    Array.prototype.forEach.call(rows.querySelectorAll('.del'), function (b) {
+      b.addEventListener('click', function () { del(b.getAttribute('data-id')); });
+    });
+
+    $('foot').textContent = list.length + ' réponse(s) affichée(s) sur ' + all.length + ' au total.';
+  }
+
+  /* ---------- Suppression ---------- */
+  function del(id) {
+    if (!id) return;
+    if (!confirm('Supprimer définitivement cette réponse ?')) return;
+    fetch(api + '?id=' + encodeURIComponent(id), { method: 'DELETE', headers: { 'x-admin-token': token() } })
+      .then(function (r) {
+        if (r.status === 401) { sessionStorage.removeItem(TKEY); showLogin('Session expirée, reconnectez-vous.'); throw 'auth'; }
+        if (!r.ok) throw 'err';
+        return r.json();
+      })
+      .then(function () { all = all.filter(function (e) { return e.id !== id; }); render(); })
+      .catch(function (e) { if (e !== 'auth') alert('La suppression a échoué. Réessayez.'); });
+  }
+
+  /* ---------- Export PDF (via l'impression du navigateur -> "Enregistrer en PDF") ---------- */
+  function exportPdf() {
+    var list = filtered();
+    if (!list.length) { alert('Aucune réponse à exporter.'); return; }
+    var yes = list.filter(function (e) { return e.attending === 'oui'; }).length;
+    var no = list.filter(function (e) { return e.attending === 'non'; }).length;
+
+    var rows = list.map(function (e, i) {
+      return '<tr>' +
+        '<td>' + (i + 1) + '</td>' +
+        '<td>' + esc(e.name) + '</td>' +
+        '<td>' + esc(e.phone) + '</td>' +
+        '<td>' + (e.attending === 'oui' ? 'Présent(e)' : 'Absent(e)') + '</td>' +
+        '<td>' + (e.message ? esc(e.message) : '—') + '</td>' +
+        '<td>' + esc(fmtDate(e.date)) + '</td>' +
+      '</tr>';
+    }).join('');
+
+    $('report').innerHTML =
+      '<div class="rep__brand">Manuela &amp; Jorel</div>' +
+      '<div class="rep__sub">Réponses au mariage — 6 février 2027, Les Jardins de René, Yaoundé</div>' +
+      '<div class="rep__meta">' + list.length + ' réponse(s) · ' + yes + ' présent(s) · ' + no + ' absent(s)' +
+        ' — Édité le ' + fmtDate(new Date().toISOString()) + '</div>' +
+      '<table><thead><tr>' +
+        '<th>#</th><th>Nom &amp; prénom</th><th>Téléphone</th><th>Présence</th><th>Message</th><th>Reçu le</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table>';
+
+    window.print();
+  }
+
+  /* ---------- Demarrage ---------- */
+  if (token()) load(); else showLogin('');
+})();
+</script>
+</body>
+</html>
