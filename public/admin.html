@@ -33,7 +33,7 @@
   .field label{display:block;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a8069;margin-bottom:8px}
   .field input{width:100%;padding:13px 15px;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:15px;color:var(--deep);outline:none;transition:border-color .2s,box-shadow .2s}
   .field input:focus{border-color:var(--coral);box-shadow:0 0 0 3px rgba(224,117,96,.15)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;background:var(--coral);color:#fff;font-weight:700;font-size:13px;letter-spacing:.06em;padding:13px 20px;border-radius:8px;transition:filter .2s,transform .2s,box-shadow .2s}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;background:var(--coral);color:#fff;font-weight:700;font-size:13px;letter-spacing:.06em;padding:13px 20px;border-radius:8px;text-decoration:none;transition:filter .2s,transform .2s,box-shadow .2s}
   .btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
   .btn--full{width:100%}
   .btn--ghost{background:#fff;color:var(--deep);border:1px solid var(--line)}
@@ -41,6 +41,8 @@
   .btn--sm{padding:9px 14px;font-size:12px;border-radius:7px}
   .msg{font-size:13px;margin-top:14px;min-height:18px}
   .msg--err{color:#b0524a}
+  .login__back{display:inline-block;margin-top:18px;font-size:12px;letter-spacing:.04em;color:#9a8069;text-decoration:none;transition:color .2s}
+  .login__back:hover{color:var(--coral)}
 
   /* ----- En-tete ----- */
   .head{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:22px}
@@ -136,6 +138,7 @@
       </div>
       <button class="btn btn--full" id="loginBtn">Se connecter</button>
       <div class="msg msg--err" id="loginMsg"></div>
+      <a href="index.html" class="login__back">← Retour au site</a>
     </div>
   </div>
 </div>
@@ -148,6 +151,7 @@
       <h1>Manuela &amp; Jorel</h1>
     </div>
     <div class="head__actions">
+      <a href="index.html" class="btn btn--ghost btn--sm">← Le site</a>
       <button class="btn btn--ghost btn--sm" id="refreshBtn">↻ Actualiser</button>
       <button class="btn btn--sm" id="exportBtn">⬇ Exporter en PDF</button>
       <button class="btn btn--ghost btn--sm" id="logoutBtn">Se déconnecter</button>
