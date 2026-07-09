@@ -1,0 +1,11 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/bidu7024/mariage
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/rm -rf $DEPLOYPATH/public $DEPLOYPATH/lib
+    - /bin/cp -R public $DEPLOYPATH/
+    - /bin/cp -R lib $DEPLOYPATH/
+    - /bin/cp -f dev-server.js $DEPLOYPATH/
+    - /bin/cp -f package.json $DEPLOYPATH/
+    - /bin/cp -f package-lock.json $DEPLOYPATH/
