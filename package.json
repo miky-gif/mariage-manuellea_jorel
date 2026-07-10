@@ -14,7 +14,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "mongodb": "^7.5.0"
+    "mysql2": "^3.22.6"
   },
   "optionalDependencies": {
     "qrcode": "^1.5.4",
