@@ -34,6 +34,10 @@ button { font-family: inherit; }
 a { color: inherit; }
 ::selection { background: var(--coral); color: #fff; }
 
+/* Texte de lecture (paragraphes) dans un serif elegant : plus joli et romantique.
+   Les titres restent en Cormorant, l'interface (menus, boutons, labels) en Mulish. */
+p, .tl__desc { font-family: 'Lora', Georgia, 'Times New Roman', serif; }
+
 .wrap { max-width: var(--maxw); margin: 0 auto; }
 .wrap--narrow { max-width: 720px; }
 .wrap--mid { max-width: 900px; }
@@ -252,7 +256,7 @@ a { color: inherit; }
 }
 .story__text { flex: 1 1 360px; max-width: 520px; }
 .story__text h3 { margin: 0 0 14px; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(24px,3vw,32px); color: var(--deep); }
-.story__text p { margin: 0 0 18px; font-size: clamp(15px,1.5vw,16.5px); line-height: 1.9; color: var(--text); }
+.story__text p { margin: 0 0 18px; font-size: clamp(15px,1.5vw,16.5px); line-height: 1.9; color: var(--text); text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
 .story__text p:last-child { margin-bottom: 0; }
 .story__text em { font-style: italic; color: color-mix(in srgb, var(--deep) 85%, var(--coral)); }
 .story__text strong { font-weight: 700; color: var(--deep); }
