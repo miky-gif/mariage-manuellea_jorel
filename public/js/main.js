@@ -112,13 +112,13 @@
 
   /* ---------- Galerie + lightbox ---------- */
   var PHOTOS = [
-    { src: 'assets/images/gallery-1.jpg', label: 'Souvenir n° 01' },
-    { src: 'assets/images/gallery-2.jpg', label: 'Souvenir n° 02' },
-    { src: 'assets/images/gallery-3.jpg', label: 'Souvenir n° 03' },
-    { src: 'assets/images/gallery-4.jpg', label: 'Souvenir n° 04' },
-    { src: 'assets/images/gallery-5.jpg', label: 'Souvenir n° 05' },
-    { src: 'assets/images/gallery-6.jpg', label: 'Souvenir n° 06' },
-    { src: 'assets/images/gallery-7.jpg', label: 'Souvenir n° 07' }
+    { src: 'assets/images/gallery-1.jpg', label: '' },
+    { src: 'assets/images/gallery-2.jpg', label: '' },
+    { src: 'assets/images/gallery-3.jpg', label: '' },
+    { src: 'assets/images/gallery-4.jpg', label: '' },
+    { src: 'assets/images/gallery-5.jpg', label: '' },
+    { src: 'assets/images/gallery-6.jpg', label: '' },
+    { src: 'assets/images/gallery-7.jpg', label: '' }
   ];
   var grid = document.getElementById('galleryGrid');
   PHOTOS.forEach(function (p, i) {
